@@ -21,21 +21,61 @@ func NewUserHandler(userService services.UserService) *UserHandler {
 	}
 }
 
-// func (h *UserHandler) ReadUser(c *gin.Context) {
-// 	var userRequest interfaces.UserResponse
-// 	if err := c.ShouldBindJSON(&userRequest); err != nil {
-// 		c.JSON(http.StatusBadRequest, interfaces.ErrorMessage{
+// Get all users
+// func (h *UserHandler) GerAllUsers(c *gin.Context) {
+// 	userData, err := h.userService.GetAllUserAccounts()
+// 	if err != nil {
+// 		c.JSON(http.StatusInternalServerError, interfaces.ErrorMessage{
 // 			Message: err.Error(),
 // 			Status:  interfaces.StatusError,
-// 			Code:    http.StatusBadRequest,
+// 			Code:    http.StatusInternalServerError,
 // 		})
 
 // 		return
 // 	}
 
-// 	userData, err := h.userService.GetUserAccount()
+// 	c.JSON(http.StatusOK, interfaces.UserResponse{
+// 		Message: "Users retrieved successfully",
+// 		Status:  interfaces.StatusSuccess,
+// 		Code:    http.StatusOK,
+// 		Data:    ,
+// 	})
 // }
 
+// Get a single User by email
+func (h *UserHandler) GetSingleUser(c *gin.Context) {
+	userMail := c.Param("email")
+
+	if userMail == "" {
+		c.JSON(http.StatusBadRequest, interfaces.ErrorMessage{
+			Message: "A required field is empty: email",
+			Status:  interfaces.StatusError,
+			Code:    http.StatusBadRequest,
+		})
+
+		return
+	}
+
+	userData, err := h.userService.GetUserAccount(userMail)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, interfaces.ErrorMessage{
+			Message: err.Error(),
+			Status:  interfaces.StatusError,
+			Code:    http.StatusInternalServerError,
+		})
+
+		return
+	}
+
+	c.JSON(http.StatusOK, interfaces.UserResponse{
+		Message: "User retrieved successfully",
+		Status:  interfaces.StatusSuccess,
+		Code:    http.StatusOK,
+		Data:    *userData,
+	})
+}
+
+// Create a User
 func (h *UserHandler) CreateUser(c *gin.Context) {
 	var userRequest interfaces.UserRegistrationRequest
 	if err := c.ShouldBindJSON(&userRequest); err != nil {

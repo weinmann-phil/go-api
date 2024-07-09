@@ -8,6 +8,7 @@ import (
 type UserService interface {
 	CreateUserAccount(userRequest *interfaces.UserRegistrationRequest) (*interfaces.UserData, error)
 	GetUserAccount(email string) (*interfaces.UserData, error)
+	// GetAllUserAccounts() (*interfaces.FullUserData, error)
 }
 
 type userService struct {
@@ -37,7 +38,19 @@ func (us *userService) CreateUserAccount(userRequest *interfaces.UserRegistratio
 	}, nil
 }
 
-// Method to GET User
+// Method to GET all Users
+// func (us *userService) GetAllUserAccounts() (*interfaces.FullUserData, error) {
+// 	userData, err := us.userRepo.FetchAllUserAccounts()
+// 	if err != nil {
+// 		return nil, err
+// 	}
+
+// 	return &interfaces.FullUserData{
+// 		Users: ,
+// 	}, nil
+// }
+
+// Method to GET a single User
 func (us *userService) GetUserAccount(email string) (*interfaces.UserData, error) {
 	userData, err := us.userRepo.FetchUserDetails(email)
 	if err != nil {

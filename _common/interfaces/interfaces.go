@@ -32,6 +32,10 @@ type UserData struct {
 	CreatedAt time.Time  `json:"createdAt"`
 }
 
+type FullUserData struct {
+	Users []UserData `json:"users"`
+}
+
 type ErrorMessage struct {
 	Message string          `json:"message"`
 	Code    int             `json:"code"`
