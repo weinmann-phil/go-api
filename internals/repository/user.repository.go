@@ -8,6 +8,7 @@ import (
 
 type UserRepository interface {
 	CreateUserAccount(userRequest *interfaces.UserRegistrationRequest) (*model.User, error)
+	UpdateUserAccount(userRequest *interfaces.UserRegistrationRequest) (*model.User, error)
 	FetchAllUserAccounts() (*[]model.User, error)
 	FetchUserDetails(userEmail string) (*model.User, error)
 }
@@ -53,6 +54,21 @@ func (r *userRepository) FetchUserDetails(email string) (*model.User, error) {
 	user := &model.User{}
 
 	if err := r.db.Where("email = ?", email).First(user).Error; err != nil {
+		return nil, err
+	}
+
+	return user, nil
+}
+
+// Method to update user by email
+func (r *userRepository) UpdateUserAccount(userRequest *interfaces.UserRegistrationRequest) (*model.User, error) {
+	user, _ := r.FetchUserDetails(userRequest.Email)
+
+	user.Username = userRequest.Username
+	user.FirstName = userRequest.FirstName
+	user.LastName = userRequest.LastName
+
+	if err := r.db.Save(&user).Error; err != nil {
 		return nil, err
 	}
 

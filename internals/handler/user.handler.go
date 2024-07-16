@@ -22,7 +22,7 @@ func NewUserHandler(userService services.UserService) *UserHandler {
 }
 
 // Get all users
-func (h *UserHandler) GerAllUsers(c *gin.Context) {
+func (h *UserHandler) GetAllUsers(c *gin.Context) {
 	userData, err := h.userService.GetAllUserAccounts()
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, interfaces.ErrorMessage{
@@ -117,6 +117,51 @@ func (h *UserHandler) CreateUser(c *gin.Context) {
 
 	c.JSON(http.StatusOK, interfaces.UserResponse{
 		Message: "User created successfully",
+		Status:  interfaces.StatusSuccess,
+		Code:    http.StatusOK,
+		Data:    output,
+	})
+}
+
+// Update a User
+func (h *UserHandler) UpdateUser(c *gin.Context) {
+	var userRequest interfaces.UserRegistrationRequest
+	if err := c.ShouldBindJSON(&userRequest); err != nil {
+		c.JSON(http.StatusBadRequest, interfaces.ErrorMessage{
+			Message: err.Error(),
+			Status:  interfaces.StatusError,
+			Code:    http.StatusBadRequest,
+		})
+
+		return
+	}
+
+	if err := h.validate.Struct(userRequest); err != nil {
+		c.JSON(http.StatusBadRequest, interfaces.ErrorMessage{
+			Message: err.Error(),
+			Status:  interfaces.StatusError,
+			Code:    http.StatusBadRequest,
+		})
+
+		return
+	}
+
+	userData, err := h.userService.UpdateUserAccount(&userRequest)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, interfaces.ErrorMessage{
+			Message: err.Error(),
+			Status:  interfaces.StatusError,
+			Code:    http.StatusInternalServerError,
+		})
+
+		return
+	}
+
+	output := []interfaces.UserData{}
+	output = append(output, *userData)
+
+	c.JSON(http.StatusOK, interfaces.UserResponse{
+		Message: "User updated successfully",
 		Status:  interfaces.StatusSuccess,
 		Code:    http.StatusOK,
 		Data:    output,
