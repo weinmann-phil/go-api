@@ -200,7 +200,7 @@ There is no particular usage yet.
 
 - [x] Add License
 - [x] Add Readme
-- [ ] Extend logic to include all CRUD operations
+- [x] Extend logic to include all CRUD operations
 - [ ] Containerize the entire logic with Podman
 - [ ] Set up a compose project to run project with all its dependencies with Podman compose
    
