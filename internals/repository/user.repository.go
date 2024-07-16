@@ -8,7 +8,7 @@ import (
 
 type UserRepository interface {
 	CreateUserAccount(userRequest *interfaces.UserRegistrationRequest) (*model.User, error)
-	FetchAllUserAccounts() ([]*model.User, error)
+	FetchAllUserAccounts() (*[]model.User, error)
 	FetchUserDetails(userEmail string) (*model.User, error)
 }
 
@@ -38,10 +38,10 @@ func (r *userRepository) CreateUserAccount(userRequest *interfaces.UserRegistrat
 }
 
 // Method to return all users
-func (r *userRepository) FetchAllUserAccounts() ([]*model.User, error) {
-	users := []*model.User{}
+func (r *userRepository) FetchAllUserAccounts() (*[]model.User, error) {
+	users := &[]model.User{}
 
-	if err := r.db.Error; err != nil {
+	if err := r.db.Find(&users).Error; err != nil {
 		return nil, err
 	}
 

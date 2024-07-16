@@ -12,7 +12,7 @@ func RegisterUserRoutes(server server.GinServer, userHandler *handler.UserHandle
 	server.RegisterGroupRoute("/api/v1/user", []interfaces.RouteDefinition{
 		{Method: "POST", Path: "/register", Handler: userHandler.CreateUser},
 		{Method: "GET", Path: "/:email", Handler: userHandler.GetSingleUser},
-		// {Method: "GET", Path: "", Handler: userHandler}
+		{Method: "GET", Path: "", Handler: userHandler.GerAllUsers},
 	}, func(c *gin.Context) {
 		logrus.Infof("Request on %s", c.Request.URL.Path)
 	})

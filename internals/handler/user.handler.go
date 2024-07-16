@@ -22,25 +22,25 @@ func NewUserHandler(userService services.UserService) *UserHandler {
 }
 
 // Get all users
-// func (h *UserHandler) GerAllUsers(c *gin.Context) {
-// 	userData, err := h.userService.GetAllUserAccounts()
-// 	if err != nil {
-// 		c.JSON(http.StatusInternalServerError, interfaces.ErrorMessage{
-// 			Message: err.Error(),
-// 			Status:  interfaces.StatusError,
-// 			Code:    http.StatusInternalServerError,
-// 		})
+func (h *UserHandler) GerAllUsers(c *gin.Context) {
+	userData, err := h.userService.GetAllUserAccounts()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, interfaces.ErrorMessage{
+			Message: err.Error(),
+			Status:  interfaces.StatusError,
+			Code:    http.StatusInternalServerError,
+		})
 
-// 		return
-// 	}
+		return
+	}
 
-// 	c.JSON(http.StatusOK, interfaces.UserResponse{
-// 		Message: "Users retrieved successfully",
-// 		Status:  interfaces.StatusSuccess,
-// 		Code:    http.StatusOK,
-// 		Data:    ,
-// 	})
-// }
+	c.JSON(http.StatusOK, interfaces.UserResponse{
+		Message: "Users retrieved successfully",
+		Status:  interfaces.StatusSuccess,
+		Code:    http.StatusOK,
+		Data:    *userData,
+	})
+}
 
 // Get a single User by email
 func (h *UserHandler) GetSingleUser(c *gin.Context) {
@@ -67,11 +67,14 @@ func (h *UserHandler) GetSingleUser(c *gin.Context) {
 		return
 	}
 
+	output := []interfaces.UserData{}
+	output = append(output, *userData)
+
 	c.JSON(http.StatusOK, interfaces.UserResponse{
 		Message: "User retrieved successfully",
 		Status:  interfaces.StatusSuccess,
 		Code:    http.StatusOK,
-		Data:    *userData,
+		Data:    output,
 	})
 }
 
@@ -109,10 +112,13 @@ func (h *UserHandler) CreateUser(c *gin.Context) {
 		return
 	}
 
+	output := []interfaces.UserData{}
+	output = append(output, *userData)
+
 	c.JSON(http.StatusOK, interfaces.UserResponse{
 		Message: "User created successfully",
 		Status:  interfaces.StatusSuccess,
 		Code:    http.StatusOK,
-		Data:    *userData,
+		Data:    output,
 	})
 }

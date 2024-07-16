@@ -33,7 +33,7 @@ type UserData struct {
 }
 
 type FullUserData struct {
-	Users []UserData `json:"users"`
+	Data []UserData `json:"data"`
 }
 
 type ErrorMessage struct {
@@ -46,7 +46,7 @@ type UserResponse struct {
 	Message string          `json:"message"`
 	Code    int             `json:"code"`
 	Status  ResponsesStatus `json:"status"`
-	Data    UserData        `json:"data"`
+	Data    []UserData      `json:"data"`
 }
 
 type RouteDefinition struct {
