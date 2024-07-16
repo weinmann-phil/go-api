@@ -26,13 +26,13 @@
 <br />
 <div align="center">
   <a href="https://github.com/weinmann-phil/go-api">
-    <img src="img/usr-mgmt.png" alt="Logo" width="80" height="80">
+    <img src="img/Go-Logo_Blue.png" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">GitLab User Management</h3>
+  <h3 align="center">Simple Go API</h3>
 
   <p align="center">
-    Central user management with Terraform 
+    Simple Go API 
     <br />
     <a href="https://github.com/weinmann-phil/go-api"><strong>Explore the docs »</strong></a>
     <br />
