@@ -14,6 +14,7 @@ func RegisterUserRoutes(server server.GinServer, userHandler *handler.UserHandle
 		{Method: "GET", Path: "/:email", Handler: userHandler.GetSingleUser},
 		{Method: "GET", Path: "", Handler: userHandler.GetAllUsers},
 		{Method: "PUT", Path: "/:email", Handler: userHandler.UpdateUser},
+		{Method: "DELETE", Path: "/:email", Handler: userHandler.DeleteUser},
 	}, func(c *gin.Context) {
 		logrus.Infof("Request on %s", c.Request.URL.Path)
 	})

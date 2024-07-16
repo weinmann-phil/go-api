@@ -11,6 +11,7 @@ type UserService interface {
 	UpdateUserAccount(userRequest *interfaces.UserRegistrationRequest) (*interfaces.UserData, error)
 	GetUserAccount(email string) (*interfaces.UserData, error)
 	GetAllUserAccounts() (*[]interfaces.UserData, error)
+	DeleteUserAccount(email string) (*interfaces.UserData, error)
 }
 
 type userService struct {
@@ -87,6 +88,23 @@ func (us *userService) GetAllUserAccounts() (*[]interfaces.UserData, error) {
 // Method to GET a single User
 func (us *userService) GetUserAccount(email string) (*interfaces.UserData, error) {
 	userData, err := us.userRepo.FetchUserDetails(email)
+	if err != nil {
+		return nil, err
+	}
+
+	return &interfaces.UserData{
+		ID:        userData.ID,
+		Username:  userData.Username,
+		FirstName: userData.FirstName,
+		LastName:  userData.LastName,
+		UserRole:  userData.UserRole,
+		CreatedAt: userData.CreatedAt,
+	}, nil
+}
+
+// Method to DELETE
+func (us *userService) DeleteUserAccount(email string) (*interfaces.UserData, error) {
+	userData, err := us.userRepo.DeleteUserAccount(email)
 	if err != nil {
 		return nil, err
 	}

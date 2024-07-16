@@ -167,3 +167,39 @@ func (h *UserHandler) UpdateUser(c *gin.Context) {
 		Data:    output,
 	})
 }
+
+// Delete a User
+func (h *UserHandler) DeleteUser(c *gin.Context) {
+	userMail := c.Param("email")
+
+	if userMail == "" {
+		c.JSON(http.StatusBadRequest, interfaces.ErrorMessage{
+			Message: "A required field is empty: email",
+			Status:  interfaces.StatusError,
+			Code:    http.StatusBadRequest,
+		})
+
+		return
+	}
+
+	userData, err := h.userService.DeleteUserAccount(userMail)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, interfaces.ErrorMessage{
+			Message: err.Error(),
+			Status:  interfaces.StatusError,
+			Code:    http.StatusInternalServerError,
+		})
+
+		return
+	}
+
+	output := []interfaces.UserData{}
+	output = append(output, *userData)
+
+	c.JSON(http.StatusOK, interfaces.UserResponse{
+		Message: "User deleted successfully",
+		Status:  interfaces.StatusSuccess,
+		Code:    http.StatusOK,
+		Data:    output,
+	})
+}

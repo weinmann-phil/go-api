@@ -11,6 +11,7 @@ type UserRepository interface {
 	UpdateUserAccount(userRequest *interfaces.UserRegistrationRequest) (*model.User, error)
 	FetchAllUserAccounts() (*[]model.User, error)
 	FetchUserDetails(userEmail string) (*model.User, error)
+	DeleteUserAccount(userEmail string) (*model.User, error)
 }
 
 type userRepository struct {
@@ -69,6 +70,20 @@ func (r *userRepository) UpdateUserAccount(userRequest *interfaces.UserRegistrat
 	user.LastName = userRequest.LastName
 
 	if err := r.db.Save(&user).Error; err != nil {
+		return nil, err
+	}
+
+	return user, nil
+}
+
+// Method to delete user record
+func (r *userRepository) DeleteUserAccount(email string) (*model.User, error) {
+	user, err := r.FetchUserDetails(email)
+	if err != nil {
+		return nil, err
+	}
+
+	if err := r.db.Delete(&user).Error; err != nil {
 		return nil, err
 	}
 
