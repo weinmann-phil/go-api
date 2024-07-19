@@ -1,13 +1,21 @@
-FROM docker.io/golang:1.22-alpine
+FROM docker.io/golang:1.22-alpine AS build
 
-WORKDIR /app
+RUN mkdir /src
+RUN apk add git
 
-COPY ./go.* .
-RUN go mod download
+ADD **/*.go /src
+ADD ./go.* /src
 
-COPY ./**/*.go .
+WORKDIR /src
 
-RUN go build -o ./gobank
+RUN go get -d -v -t
+RUN GOOS=linux go build -v -o gobank
+RUN chmod +x gobank
 
+# ---
+FROM docker.io/scratch AS production
+
+COPY --from=build /src/gobank /usr/local/bin/gobank
 EXPOSE 8080
-CMD [ "./gobank" ]
+
+CMD [ "gobank" ]
