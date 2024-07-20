@@ -201,7 +201,7 @@ There is no particular usage yet.
 - [x] Add License
 - [x] Add Readme
 - [x] Extend logic to include all CRUD operations
-- [ ] Containerize the entire logic with Podman
+- [x] Containerize the entire logic with Podman
 - [ ] Set up a compose project to run project with all its dependencies with Podman compose
    
 See the [open issues](https://github.com/weinmann-phil/go-api/issues) for a full list of proposed features (and known issues).
