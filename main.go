@@ -1,6 +1,6 @@
 package main
 
-import "github.com/weinmann-phil/gobank/cmd"
+import "github.com/weinmann-phil/go-api/cmd"
 
 func main() {
 	cmd.Execute()

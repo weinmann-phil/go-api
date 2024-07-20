@@ -6,9 +6,9 @@ import (
 	"time"
 
 	"github.com/sirupsen/logrus"
-	"github.com/weinmann-phil/gobank/cmd/server"
-	"github.com/weinmann-phil/gobank/config"
-	"github.com/weinmann-phil/gobank/provider"
+	"github.com/weinmann-phil/go-api/cmd/server"
+	"github.com/weinmann-phil/go-api/config"
+	"github.com/weinmann-phil/go-api/provider"
 )
 
 func Execute() {

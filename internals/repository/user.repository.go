@@ -1,8 +1,8 @@
 package repository
 
 import (
-	"github.com/weinmann-phil/gobank/_common/interfaces"
-	"github.com/weinmann-phil/gobank/internals/model"
+	"github.com/weinmann-phil/go-api/_common/interfaces"
+	"github.com/weinmann-phil/go-api/internals/model"
 	"gorm.io/gorm"
 )
 

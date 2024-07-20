@@ -5,7 +5,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/gofrs/uuid"
-	"github.com/weinmann-phil/gobank/internals/model"
+	"github.com/weinmann-phil/go-api/internals/model"
 )
 
 type ResponsesStatus string

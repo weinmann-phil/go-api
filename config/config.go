@@ -8,7 +8,7 @@ import (
 
 	"github.com/joho/godotenv"
 	"github.com/sirupsen/logrus"
-	"github.com/weinmann-phil/gobank/internals/model"
+	"github.com/weinmann-phil/go-api/internals/model"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )

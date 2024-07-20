@@ -1,11 +1,11 @@
 package provider
 
 import (
-	"github.com/weinmann-phil/gobank/cmd/server"
-	"github.com/weinmann-phil/gobank/internals/handler"
-	"github.com/weinmann-phil/gobank/internals/repository"
-	"github.com/weinmann-phil/gobank/internals/routes"
-	"github.com/weinmann-phil/gobank/internals/services"
+	"github.com/weinmann-phil/go-api/cmd/server"
+	"github.com/weinmann-phil/go-api/internals/handler"
+	"github.com/weinmann-phil/go-api/internals/repository"
+	"github.com/weinmann-phil/go-api/internals/routes"
+	"github.com/weinmann-phil/go-api/internals/services"
 	"gorm.io/gorm"
 )
 

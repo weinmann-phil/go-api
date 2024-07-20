@@ -6,7 +6,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/sirupsen/logrus"
-	"github.com/weinmann-phil/gobank/_common/interfaces"
+	"github.com/weinmann-phil/go-api/_common/interfaces"
 )
 
 type GinServer interface {

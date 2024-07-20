@@ -2,8 +2,8 @@ package services
 
 import (
 	"github.com/sirupsen/logrus"
-	"github.com/weinmann-phil/gobank/_common/interfaces"
-	"github.com/weinmann-phil/gobank/internals/repository"
+	"github.com/weinmann-phil/go-api/_common/interfaces"
+	"github.com/weinmann-phil/go-api/internals/repository"
 )
 
 type UserService interface {

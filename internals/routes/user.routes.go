@@ -3,9 +3,9 @@ package routes
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/sirupsen/logrus"
-	"github.com/weinmann-phil/gobank/_common/interfaces"
-	"github.com/weinmann-phil/gobank/cmd/server"
-	"github.com/weinmann-phil/gobank/internals/handler"
+	"github.com/weinmann-phil/go-api/_common/interfaces"
+	"github.com/weinmann-phil/go-api/cmd/server"
+	"github.com/weinmann-phil/go-api/internals/handler"
 )
 
 func RegisterUserRoutes(server server.GinServer, userHandler *handler.UserHandler) {

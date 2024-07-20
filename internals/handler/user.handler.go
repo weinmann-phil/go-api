@@ -5,8 +5,8 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
-	"github.com/weinmann-phil/gobank/_common/interfaces"
-	"github.com/weinmann-phil/gobank/internals/services"
+	"github.com/weinmann-phil/go-api/_common/interfaces"
+	"github.com/weinmann-phil/go-api/internals/services"
 )
 
 type UserHandler struct {
