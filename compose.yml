@@ -1,17 +1,11 @@
 version: '3'
 
-name: gobank
+name: go-api
 
 volumes:
-  postgresdata: {}
+  postgres: 
 
 services:
-  app:
-    build:
-      context: .
-    ports:
-      - 8080:8080
-      
   postgres:
     image: "docker.io/postgres:16-alpine"
     ports:
@@ -20,5 +14,29 @@ services:
       POSTGRES_USER: app
       POSTGRES_PASSWORD: app
       POSTGRES_DB: app
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5432"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
     volumes:
     - postgres:/home/postgres/pgdata/data
+
+  app:
+    build:
+      context: .
+    environment:
+      APP_PORT: 8080
+      DB_HOST: localhost
+      DB_USER: app
+      DB_PASS: app
+      DB_NAME: app
+      DB_PORT: 5432
+    ports:
+      - 8080:8080
+    depends_on:
+      postgres:
+        condition: service_started
+    links:
+      - postgres
+      

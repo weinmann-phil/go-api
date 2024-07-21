@@ -6,20 +6,19 @@ import (
 	"os"
 	"strings"
 
-	"github.com/joho/godotenv"
 	"github.com/sirupsen/logrus"
 	"github.com/weinmann-phil/go-api/internals/model"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
-func LoadEnvironment() {
-	err := godotenv.Load(".env")
-	if err != nil {
-		logrus.Fatalf("Error loading .env file")
-	}
+// func LoadEnvironment() {
+// 	err := godotenv.Load(".env")
+// 	if err != nil {
+// 		logrus.Fatalf("Error loading .env file")
+// 	}
 
-}
+// }
 
 func SetupDatabase() (*gorm.DB, error) {
 	dbHost := os.Getenv(DbHost)

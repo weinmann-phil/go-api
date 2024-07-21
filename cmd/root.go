@@ -16,7 +16,8 @@ func Execute() {
 	server := builder.Build()
 
 	ctx := context.Background()
-	config.LoadEnvironment()
+	logrus.Info("0")
+	// config.LoadEnvironment()
 
 	db, err := config.SetupDatabase()
 	if err != nil {
